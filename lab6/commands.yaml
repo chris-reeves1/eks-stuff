@@ -1,0 +1,18 @@
+kubectl get ns # gets all namespaces
+
+kubctl create ns dev-cli # creates a namspace - can be done through a yaml file also
+
+kubectl get pods -n dev-manifest # get pods for a namespace
+
+kubectl get deployments -n dev-cli # gets all deployments in dev-cli 
+
+kubectl delete deployments --all -n dev-cli # deletes all deployments in dev-cli namespace
+
+kubectl delete pods --all -n dev-cli # deletes all pods in dev-cli namespace
+
+kubectl delete services --all -n dev-cli # deletes all services in dev-cli
+
+kubectl delete ns dev-cli # deletes all resources in the namespace
+
+
+

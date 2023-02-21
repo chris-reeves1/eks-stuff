@@ -2,6 +2,7 @@ apiVersion: apps/v1 # Version of the Kubernetes API to use, apps is a group of r
 kind: Deployment # This is a deployment resource
 metadata:
   name: nginx # Name of the deployment
+  namespace: dev-cli
   labels:
     app: nginx # Labels are used to identify related resources and organize them
 spec:
