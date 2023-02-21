@@ -14,5 +14,5 @@ kubectl delete services --all -n dev-cli # deletes all services in dev-cli
 
 kubectl delete ns dev-cli # deletes all resources in the namespace
 
-
+ubectl config set-context --current --namespace=dev-cli # changes default namespace to dev-cli
 
