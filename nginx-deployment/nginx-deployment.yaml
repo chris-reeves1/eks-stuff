@@ -2,16 +2,15 @@ apiVersion: apps/v1 # Version of the Kubernetes API to use, apps is a group of r
 kind: Deployment # This is a deployment resource
 metadata:
   name: nginx # Name of the deployment
-  namespace: dev-cli
   labels:
-    app: nginx # Labels are used to identify related resources and organize them
+    app: nginx # give the deployemtn itself the tag nginx.
 spec:
   replicas: 4 # The desired number of replicas
   selector:
     matchLabels:
-      app: nginx # The selector specifies which pods are controlled by this deployment
+      app: nginx # The selector specifies which pods are controlled by this deployment. looks for tag nginx on pods. 
   strategy: # This specifies how the deployment strategy is applied when there is a new version of the deployment
-    rollingUpdate:
+    rollingUpdate: this id default, others are recreate (terminates all instances and builds new ones but gives downtime. also 
       maxSurge: 25% # Maximum number of pods that can be created above the desired number of replicas during the update
       maxUnavailable: 25% # Maximum number of pods that can be unavailable during the update
   template:
