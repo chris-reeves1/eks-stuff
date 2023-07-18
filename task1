@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: chrisreeves1/myapp
+          ports:
+            - containerPort: 5500
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  selector:
+    app: myapp
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80 # exposing the service as port 80. 
+      targetPort: 5500 # matches the pod + container process.      
+  type: LoadBalancer
