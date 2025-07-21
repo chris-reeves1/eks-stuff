@@ -32,3 +32,34 @@ spec:
       limits:
         memory: "512Mi"
         cpu: "500m"
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx 
+spec:
+  volumes:
+  - name: html-vol
+    configMap:
+      name: html-config
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    volumeMounts:
+      - name: html-vol
+        mountPath: /usr/share/nginx/html
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: html-config
+data:
+  index.html: |
+    <h1>Hello from ConfigMap</h1>
