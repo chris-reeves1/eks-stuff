@@ -15,3 +15,51 @@ spec:
       value: mydatabase
     ports:
     - containerPort: 3306
+
+
+
+
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+type: Opaque
+data:
+  mysql-password: cGFzc3dvcmQ=  # base64 for "password"
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config
+data:
+  mysql-database: mydatabase
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  containers:
+  - name: mysql
+    image: mysql:8.0.28
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: my-secret
+          key: mysql-password
+    - name: MYSQL_DATABASE
+      valueFrom:
+        configMapKeyRef:
+          name: my-config
+          key: mysql-database
+    ports:
+    - containerPort: 3306
+
