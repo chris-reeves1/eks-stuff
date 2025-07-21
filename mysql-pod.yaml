@@ -63,3 +63,22 @@ spec:
     ports:
     - containerPort: 3306
 
+
+✅ When to Use envFrom
+If you want to load all values from a ConfigMap or Secret as environment variables, use:
+
+envFrom:
+  - configMapRef:
+      name: my-config
+  - secretRef:
+      name: my-secret
+
+      
+This would automatically set:
+MYSQL_DATABASE=mydatabase
+MYSQL_ROOT_PASSWORD=password
+
+🔍 Why the Long Form Might Be Better:
+You only want specific keys, not all keys.
+You want to rename the environment variable.
+You want clarity and avoid accidental pollution of the environment.
